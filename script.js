@@ -4,7 +4,7 @@ const arrivalInfo = document.getElementById("arrivalContent");
 
 // ----------------------obtain data from API-----------------------
 async function fetchBusArrivalInfo(busStopId) {
-    const response = await fetch(`https://sg-bus-arrivals.vercel.app/?id=${userBusStopId}`);
+    const response = await fetch(`https://sg-bus-arrivals.vercel.app/?id=${busStopId}`);
 
     if (response.ok) {
         const data = await response.json();
@@ -26,7 +26,7 @@ function busArrivalFormat(arrivalData) {
         
         formattedData.push(`
             <div>
-                <p>Bus <strong>${bus.no}</strong>: ${arrivalTimeString}</p>
+                <p>Bus ${bus.bus_no}: ${arrivalTimeString}</p>
             </div>
         `)
     }
