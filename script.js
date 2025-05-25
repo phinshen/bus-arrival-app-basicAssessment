@@ -13,5 +13,19 @@ async function fetchBusArrivalInfo(busStopId) {
         throw new Error ('Error fetching bus arrival data.');
     }
 }
-// --------------------------setting up bus arrival content-----------------------
-function 
+// --------------------------setting up the bus arrival data format-----------------------
+function busArrivalFormat(arrivalData) {
+    const buses = arrivalData.services;
+    const totalBuses = buses.length;
+    const formattedData = [];
+    for (const bus of buses) {
+        const arrivalTimeString = bus.next_bus_mins <= 0 ? `<strong>Arriving</strong>` : `${bus.next_bus_mins} min(s)`;
+        formattedData.push(`
+            <div>
+                <p><strong>${totalBuses} buses</strong></p>
+            </div>
+        `)
+
+        return formattedData.join(" ");
+    }
+}
