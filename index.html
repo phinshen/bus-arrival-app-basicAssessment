@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bus Arrival Tracking System</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+
+  <body>
+    <main>
+      <h1>Bus Arrival App</h1>
+      <label for="busStopId">Bus Stop ID: </label><br />
+      <input
+        type="text"
+        id="busStopId"
+        name="busStopId"
+        placeholder="Enter bus stop ID"
+      /><br />
+      <button onclick="showArrival()">Show Arrival</button>
+      <div id="arrivalContent"></div>
+    </main>
+  </body>
+</html>
