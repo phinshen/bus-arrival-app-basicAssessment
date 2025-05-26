@@ -17,23 +17,51 @@ async function fetchBusArrivalInfo(busStopId) {
 function busArrivalFormat(arrivalData) {
     const buses = arrivalData.services; // get list of buses
     const totalBuses = buses.length; // total number of buses
-    const formattedData = [];
 
-    formattedData.push(`<p><strong>${totalBuses} buses</strong></p>`);
-
-    // Loop through each bus in the list
-    for (const bus of buses) {
-        // If the bus is already arriving or in a few minutes
-        const arrivalTimeString = bus.next_bus_mins <= 0 ? `<strong>Arriving</strong>` : `${bus.next_bus_mins} min(s)`;
-        
-        formattedData.push(`
-            <div>
-                <p>Bus ${bus.bus_no}: ${arrivalTimeString}</p>
-            </div>
-        `)
+    if (totalBuses === 0) {
+        return '<p>No bus arriving soon.</p>';
     }
 
-    return formattedData.join(" "); // combine all the HTML strings into one
+    let formattedData = `
+        <p><strong>${totalBuses} buses arriving</strong></p>
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+          <thead>
+            <tr>
+              <th>Bus No.</th>
+              <th>Operator</th>
+              <th>Next Arrival</th>
+            </tr>
+          </thead>
+          <tbody>
+        `;
+
+      // Loop through each bus and add a row to the table
+      for (const bus of buses) {
+        // Changed from bus.bus_no to bus.no (correct property from API)
+        const busNo = bus.bus_no;
+
+        // Added operator column (from API response)
+        const operator = bus.operator;
+
+        // Format arrival time string: "Arriving" if 0 or less, else X min(s)
+        const arrivalTimeString = bus.next_bus_mins <= 0 ? `<strong>Arriving</strong>` : `${bus.next_bus_mins} min(s)`;
+
+        // Add a row for each bus
+        formattedData += `
+            <tr>
+                <td>${busNo}</td>
+                <td>${operator}</td>
+                <td>${arrivalTimeString}</td>
+            </tr>
+        `;
+    }
+
+    formattedData += `
+          </tbody>
+        </table>
+    `;
+
+    return formattedData;
 }
 // --------------------------- Display the bus arrival data on webpage ---------------------
 function displayBusArrival(busStopId) {
