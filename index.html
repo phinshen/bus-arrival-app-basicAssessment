@@ -4,21 +4,26 @@
     <title>Bus Arrival Tracking System</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <script src="https://kit.fontawesome.com/7856f408f8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
     <main>
-      <h1>Bus Arrival App</h1>
-      <label for="busStopId">Bus Stop ID: </label><br />
-      <input
-        type="text"
-        id="busStopId"
-        name="busStopId"
-        placeholder="Enter bus stop ID"
-      /><br />
-      <button onclick="showArrivals()">Show Arrivals</button>
-      <div id="arrivalContent"></div>
+      <div class="container">
+        <h1><i class="fa-solid fa-bus" style="margin-right: 10px"></i>Bus Arrival App</h1>
+        <label for="busStopId">Bus Stop ID: </label><br />
+        <div>
+          <input
+            type="text"
+            id="busStopId"
+            name="busStopId"
+            placeholder="Enter bus stop ID"
+          />
+          <button id="showArrivals" onclick="showArrivals()">Show Arrivals</button>
+        </div>
+        <div id="arrivalContent"></div>
+      </div>
     </main>
     <script src="script.js"></script>
   </body>

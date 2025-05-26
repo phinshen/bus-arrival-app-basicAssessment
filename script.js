@@ -1,8 +1,8 @@
-// -----------------getting value from user input from HTML------------------------
+// ------------------------------------------getting value from user input from HTML------------------------------------------------
 const userBusStopId = document.getElementById("busStopId"); // input box where user types bus stop ID
 const arrivalInfo = document.getElementById("arrivalContent"); // area to show arrival info
 
-// ----------------------fetch bus arrival data from API-----------------------
+// ------------------------------------------------fetch bus arrival data from API---------------------------------------------------
 async function fetchBusArrivalInfo(busStopId) {
     const response = await fetch(`https://sg-bus-arrivals.vercel.app/?id=${busStopId}`);
     // Add the user-provided ID to the API endpoint
@@ -13,7 +13,7 @@ async function fetchBusArrivalInfo(busStopId) {
         throw new Error ('Error fetching bus arrival data.');
     }
 }
-// -------------------------- Format the bus arrival data -----------------------
+// ---------------------------------------------- Format the bus arrival data ---------------------------------------------------------
 function busArrivalFormat(arrivalData) {
     const buses = arrivalData.services; // get list of buses
     const totalBuses = buses.length; // total number of buses
@@ -23,7 +23,7 @@ function busArrivalFormat(arrivalData) {
     }
 
     let formattedData = `
-        <p><strong>${totalBuses} buses arriving</strong></p>
+        <p class="totalBuses"><strong>${totalBuses} Buses Arriving!</strong></p>
         <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
           <thead>
             <tr>
@@ -49,9 +49,9 @@ function busArrivalFormat(arrivalData) {
         // Add a row for each bus
         formattedData += `
             <tr>
-                <td>${busNo}</td>
-                <td>${operator}</td>
-                <td>${arrivalTimeString}</td>
+                <td class="tableData">${busNo}</td>
+                <td class="tableData">${operator}</td>
+                <td class="tableData">${arrivalTimeString}</td>
             </tr>
         `;
     }
@@ -63,7 +63,7 @@ function busArrivalFormat(arrivalData) {
 
     return formattedData;
 }
-// --------------------------- Display the bus arrival data on webpage ---------------------
+// ----------------------------------------------------------- Display the bus arrival data on webpage -------------------------------------------------
 function displayBusArrival(busStopId) {
     arrivalInfo.innerHTML = "Loading..."; // temporary message while fetching
     fetchBusArrivalInfo(busStopId)
@@ -77,7 +77,7 @@ function displayBusArrival(busStopId) {
         })
 }   
 
-// ---------------------- Called when user clicks the button -----------------------
+// ----------------------------------------------------------------- Called when user clicks the button -------------------------------------------------
 let intervalId; // used to store repeating timer
 
 function showArrivals() {
